@@ -1,0 +1,122 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+>
+    <uxap:ObjectPageDynamicHeaderTitle>
+        <uxap:expandedHeading>
+            <FlexBox direction="Column">
+                <FlexBox
+                    direction="Row"
+                    alignContent="Start"
+                    alignItems="Center"
+                >
+                    <Label
+                        text="{i18n>SapmaTitle}"
+                        showColon="true"
+                    />
+                    <Title
+                        class="sapUiTinyMarginBegin"
+                        text="{viewModel>/Header/Qmnum}"
+                        wrapping="true"
+                    />
+                </FlexBox>
+
+                <FlexBox
+                    direction="Row"
+                    alignContent="Start"
+                    alignItems="Center"
+                >
+                    <Label text="{i18n>Statu}" />
+                    <ObjectStatus
+                        class="sapUiTinyMarginBegin"
+                        text="{viewModel>/Header/StatuTxt}"
+                        state="{ path:'viewModel>/Header/Statu', formatter:'.formatter._setStatuState' }"
+                    />
+                </FlexBox>
+            </FlexBox>
+        </uxap:expandedHeading>
+
+        <uxap:snappedHeading>
+            <HBox>
+                <VBox>
+                    <Image
+                        class="sapUiSmallMarginEnd"
+                        src="{ value: 'karsan_logo.png', formatter: '.formatter.getImage' }"
+                    />
+                </VBox>
+                <VBox>
+                    <FlexBox direction="Column">
+                        <FlexBox
+                            direction="Row"
+                            alignContent="Start"
+                            alignItems="Center"
+                            class="sapUiSmallMarginBegin sapUiSmallMarginTop"
+                        >
+                            <Label
+                                text="{i18n>SapmaTitle}"
+                                showColon="true"
+                            />
+                            <Title
+                                class="sapUiTinyMarginBegin"
+                                text="{viewModel>/Header/Qmnum}"
+                                wrapping="true"
+                            />
+                        </FlexBox>
+
+                        <FlexBox
+                            direction="Row"
+                            alignContent="Start"
+                            alignItems="Center"
+                            class="sapUiSmallMarginBegin"
+                        >
+                            <Label text="{i18n>Statu}" />
+                            <ObjectStatus
+                                class="sapUiTinyMarginBegin"
+                                text="{viewModel>/Header/StatuTxt}"
+                                state="{ path:'viewModel>/Header/Statu', formatter:'.formatter._setStatuState' }"
+                            />
+                        </FlexBox>
+                    </FlexBox>
+                </VBox>
+            </HBox>
+        </uxap:snappedHeading>
+
+        <uxap:snappedTitleOnMobile>
+            <Title text="{i18n>SapmaTitle} {viewModel>/Header/Qmnum}" />
+        </uxap:snappedTitleOnMobile>
+
+        <uxap:actions>
+            <Button
+                text="{i18n>CancelNotif}"
+                type="Reject"
+                press="onCancelNotif"
+                visible="{viewModel>/ActionVis/CancelNotif}"
+            />
+            <Button
+                text="{i18n>SaveNotif}"
+                type="Accept"
+                press="onSaveNotif"
+                visible="{viewModel>/ActionVis/SaveNotif}"
+            />
+            <Button
+                text="{i18n>SendToKarsan}"
+                type="Emphasized"
+                press="onSendToKarsan"
+                visible="{viewModel>/ActionVis/SendToKarsan}"
+            />
+            <Button
+                text="{i18n>SendForApproval}"
+                type="Emphasized"
+                press="onSendForApproval"
+                visible="{viewModel>/ActionVis/SendForApproval}"
+            />
+            <Button
+                text="{i18n>CancelAndCopy}"
+                type="Reject"
+                press="onCancelAndCopy"
+                visible="{viewModel>/ActionVis/CancelAndCopy}"
+            />
+        </uxap:actions>
+    </uxap:ObjectPageDynamicHeaderTitle>
+</core:FragmentDefinition>

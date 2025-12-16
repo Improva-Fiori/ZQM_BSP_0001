@@ -1,0 +1,4 @@
+# Binary file definitions
+^.*\.jpeg$
+^.*\.jpg$
+^.*\.png$

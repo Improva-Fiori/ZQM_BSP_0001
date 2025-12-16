@@ -1,0 +1,704 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:forms="sap.ui.layout.form"
+>
+    <uxap:ObjectPageSection
+        title="{i18n>GeneralTitle}"
+        titleUppercase="false"
+        visible="{viewModel>/TabAuth/General}"
+    >
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection
+                title="{i18n>GeneralTitle}"
+                showTitle="false"
+            >
+                <uxap:blocks>
+                    <FlexBox
+                        direction="Column"
+                        alignItems="Start"
+                        wrap="Wrap"
+                    >
+                        <FlexBox
+                            direction="Column"
+                            class="sapUiLargeMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                            visible="{= ${viewModel>/IsCancelled}}"
+                        >
+                            <OverflowToolbar
+                                class="sapUiTinyMarginBottom"
+                                design="Transparent"
+                                style="Standard"
+                                width="100%"
+                            >
+                                <Title
+                                    text="{i18n>CancelReasonTitle}"
+                                    titleStyle="H3"
+                                />
+                            </OverflowToolbar>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Start"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiTinyMarginTop"
+                                    text="{i18n>CancelReason}"
+                                    showColon="true"
+                                    width="135px"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/CancelRsn}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="false"
+                                />
+                            </FlexBox>
+                        </FlexBox>
+
+                        <FlexBox
+                            direction="Column"
+                            class="sapUiLargeMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom"
+                            visible="{= !${viewModel>/IsSupplierLogged}}"
+                        >
+                            <OverflowToolbar
+                                class="sapUiTinyMarginBottom"
+                                design="Transparent"
+                                style="Standard"
+                                width="100%"
+                            >
+                                <Title
+                                    text="{i18n>RefQmnumTitle}"
+                                    titleStyle="H3"
+                                />
+                            </OverflowToolbar>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Start"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiTinyMarginTop"
+                                    text="{i18n>RefQmnum}"
+                                    showColon="true"
+                                    width="135px"
+                                />
+                                <FlexBox
+                                    direction="Row"
+                                    alignItems="Start"
+                                >
+                                    <Input
+                                        value="{viewModel>/Header/RefQmnum}"
+                                        enabled="{= ${viewModel>/Header/Qmnum} !== '&amp;1' ? false : ${viewModel>/Editable} }"
+                                        showValueHelp="true"
+                                        valueHelpRequest="onVhRefQmnum"
+                                        maxLength="12"
+                                        showSuggestion="true"
+                                        suggest="onSuggestRefQmnum"
+                                        suggestionItems="{ path: '/ShRefQmnumSet' }"
+                                        showTableSuggestionValueHelp="true"
+                                        change="onChangeRefQmnum"
+                                    >
+                                        <suggestionItems>
+                                            <core:Item
+                                                key="{Qmnum}"
+                                                text="{Qmnum}"
+                                            />
+                                        </suggestionItems>
+                                    </Input>
+
+                                    <Button
+                                        class="sapUiTinyMarginBegin"
+                                        icon="sap-icon://hint"
+                                        tooltip="{i18n>Info}"
+                                        press="onInfoPress('RefQmnum',$event)"
+                                        visible="{= ${viewModel>/Editable} ? ${viewModel>/Header/Qmnum} !== '&amp;1' : false }"
+                                        type="Ghost"
+                                    />
+                                </FlexBox>
+                            </FlexBox>
+                        </FlexBox>
+
+                        <FlexBox
+                            direction="Column"
+                            class="sapUiLargeMarginBegin sapUiTinyMarginEnd sapUiSmallMarginTopBottom"
+                        >
+                            <OverflowToolbar
+                                class="sapUiTinyMarginBottom"
+                                design="Transparent"
+                                style="Standard"
+                                width="100%"
+                            >
+                                <Title
+                                    text="{i18n>FundamentalTitle}"
+                                    titleStyle="H3"
+                                />
+                            </OverflowToolbar>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Start"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Matnr}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <FlexBox
+                                    direction="Column"
+                                    alignItems="Start"
+                                >
+                                    <Input
+                                        value="{viewModel>/Header/Matnr}"
+                                        editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                        valueHelpRequest="onVhMatnr"
+                                        showValueHelp="true"
+                                        change="onChangeInputMatnr"
+                                        maxLength="40"
+                                    />
+                                    <Text text="{viewModel>/Header/Maktx}" />
+                                </FlexBox>
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Start"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Lifnum}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+
+                                <FlexBox
+                                    direction="Column"
+                                    alignItems="Start"
+                                >
+                                    <Input
+                                        value="{viewModel>/Header/Lifnr}"
+                                        editable="{ parts: ['viewModel>/Editable','viewModel>/IsSupplierLogged', 'viewModel>/ReqKarsan'], formatter: '.formatter.setFieldEditable' }"
+                                        valueHelpRequest="onVhLifnr"
+                                        showValueHelp="true"
+                                        change="onChangeInputLifnr"
+                                        maxLength="10"
+                                    />
+                                    <Text text="{viewModel>/Header/LfName1}" />
+                                </FlexBox>
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Rkmng}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <Input
+                                    type="Number"
+                                    value="{viewModel>/Header/Rkmng}"
+                                    description="{viewModel>/Header/Mgein}"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                    width="116%"
+                                    change="onChangeInputRkmng"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Product}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShUrunGrubuSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/UrunGrubu}"
+                                    enabled="{= !${viewModel>/Vehicle}.length > 0}"
+                                    editable="{ parts: ['viewModel>/Editable','viewModel>/IsSupplierLogged'], formatter: '.formatter.setFieldEditable' }"
+                                >
+                                    <core:ListItem
+                                        key="{Atwrt}"
+                                        text="{Atwrt}"
+                                        additionalText="{Atwtb}"
+                                    />
+                                </ComboBox>
+
+                                <Button
+                                    class="sapUiTinyMarginBegin"
+                                    icon="sap-icon://hint"
+                                    tooltip="{i18n>Info}"
+                                    press="onInfoPress('UrunGrubu',$event)"
+                                    visible="{= ${viewModel>/Vehicle}.length > 0}"
+                                    type="Ghost"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Begda}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <DatePicker
+                                    value="{
+                                  'path': 'viewModel>/Header/Begda',
+                                  'type': 'sap.ui.model.type.Date',
+                                  'formatOptions': { 'pattern': 'dd/MM/y' }
+                                   }"
+                                    placeholder="dd/MM/yy"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Endda}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <DatePicker
+                                    value="{
+                                  'path': 'viewModel>/Header/Endda',
+                                  'type': 'sap.ui.model.type.Date',
+                                  'formatOptions': { 'pattern': 'dd/MM/y' }
+                                   }"
+                                    placeholder="dd/MM/yy"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Tekrar}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShTekrarSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/Tekrar}"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Description}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>PartStatu}"
+                                    showColon="true"
+                                    width="200px"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShPartStatuSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/PartStatu}"
+                                    editable="false"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Description}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+
+                                <Button
+                                    class="sapUiTinyMarginBegin"
+                                    icon="sap-icon://hint"
+                                    tooltip="{i18n>Info}"
+                                    press="onInfoPress('PartStatu',$event)"
+                                    visible="{= ${viewModel>/Editable} ? ${viewModel>/FlowGenerated} : false }"
+                                    type="Ghost"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Kaynak}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShKaynakSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/Kaynak}"
+                                    enabled="{= ${viewModel>/Editable} ? !${viewModel>/FlowGenerated} : false }"
+                                    editable="{ parts: ['viewModel>/Editable','viewModel>/IsSupplierLogged','viewModel>/ReqKarsan'], formatter: '.formatter.setFieldEditable' }"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Description}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+
+                                <Button
+                                    class="sapUiTinyMarginBegin"
+                                    icon="sap-icon://hint"
+                                    tooltip="{i18n>Info}"
+                                    press="onInfoPress('Kaynak',$event)"
+                                    visible="{= ${viewModel>/Editable} ? ${viewModel>/FlowGenerated} : false }"
+                                    type="Ghost"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{/#Report/Prueflos/@sap:label}"
+                                    showColon="true"
+                                    width="200px"
+                                />
+                                <Input
+                                    value="{ path: 'viewModel>/Header/Prueflos', formatter: '.formatter.formatPrueflos' }"
+                                    editable="false"
+                                />
+                            </FlexBox>
+                        </FlexBox>
+
+                        <FlexBox
+                            direction="Column"
+                            class="sapUiTinyMargin sapUiLargeMarginBegin sapUiMediumMarginTop sapUiSmallMarginBottom"
+                        >
+                            <OverflowToolbar
+                                class="sapUiTinyMarginBottom"
+                                design="Transparent"
+                                style="Standard"
+                                width="100%"
+                            >
+                                <Title
+                                    text="{i18n>SapmaDetailTitle}"
+                                    titleStyle="H3"
+                                />
+                            </OverflowToolbar>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>SapmaTuru}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShSapmaTuruSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/SapmaTuru}"
+                                    width="170%"
+                                    maxWidth="200%"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Kurztext}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>SapmaDescr}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/SapmaDescr}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>SpmNrmlDrm}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/SpmNrmlDrm}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>SpmDrm}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/SpmDrm}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>HataTuru}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShHataTuruSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/HataTuru}"
+                                    enabled="{= ${viewModel>/Editable} ? !${viewModel>/FlowGenerated} : false }"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Kurztext}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+
+                                <Button
+                                    class="sapUiTinyMarginBegin"
+                                    icon="sap-icon://hint"
+                                    tooltip="{i18n>Info}"
+                                    press="onInfoPress('HataTuru',$event)"
+                                    visible="{= ${viewModel>/Editable} ? ${viewModel>/FlowGenerated} : false }"
+                                    type="Ghost"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>AracBolumu}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <ComboBox
+                                    items="{path : '/ShVehSectionSet', templateShareable:false}"
+                                    change="onChangeCombobox"
+                                    showSecondaryValues="true"
+                                    selectedKey="{viewModel>/Header/AracBolumu}"
+                                    width="170%"
+                                    maxWidth="200%"
+                                    editable="{ parts: ['viewModel>/Editable','viewModel>/IsSupplierLogged'], formatter: '.formatter.setFieldEditable' }"
+                                >
+                                    <core:ListItem
+                                        key="{Code}"
+                                        text="{Kurztext}"
+                                        additionalText="{Code}"
+                                    />
+                                </ComboBox>
+                            </FlexBox>
+                        </FlexBox>
+
+                        <FlexBox
+                            direction="Column"
+                            class="sapUiTinyMargin sapUiLargeMarginBegin sapUiMediumMarginTop sapUiSmallMarginBottom"
+                        >
+                            <OverflowToolbar
+                                class="sapUiTinyMarginBottom"
+                                design="Transparent"
+                                style="Standard"
+                                width="100%"
+                            >
+                                <Title
+                                    text="{i18n>SapmaAnalysisTitle}"
+                                    titleStyle="H3"
+                                />
+                            </OverflowToolbar>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>RootIssue}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/RootIssue}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>SapmaFix}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/SapmaFix}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>SapmaFixDat}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                    wrapping="true"
+                                />
+                                <DatePicker
+                                    value="{
+                                  'path': 'viewModel>/Header/SapmaFixDat',
+                                  'type': 'sap.ui.model.type.Date',
+                                  'formatOptions': { 'pattern': 'dd/MM/y' }
+                                   }"
+                                    placeholder="dd/MM/yy"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    class="sapUiLargeMarginBottom"
+                                    text="{i18n>SapmaPrevent}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <TextArea
+                                    value="{viewModel>/Header/SapmaPrevent}"
+                                    rows="4"
+                                    cols="44"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Center"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>SapmaPreDat}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                    wrapping="true"
+                                />
+                                <DatePicker
+                                    value="{
+                                  'path': 'viewModel>/Header/SapmaPreDat',
+                                  'type': 'sap.ui.model.type.Date',
+                                  'formatOptions': { 'pattern': 'dd/MM/y' }
+                                   }"
+                                    placeholder="dd/MM/yy"
+                                    editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                />
+                            </FlexBox>
+                        </FlexBox>
+                    </FlexBox>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

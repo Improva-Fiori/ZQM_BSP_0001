@@ -1,0 +1,124 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:cm="sap.suite.ui.commons"
+    xmlns:upload="sap.m.upload"
+>
+    <uxap:ObjectPageSection
+        title="{i18n>FileTitle}"
+        titleUppercase="false"
+        visible="{viewModel>/TabAuth/Attachment}"
+    >
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection
+                class="sapUiSmallMargin"
+                title="{i18n>FileTitle}"
+                showTitle="true"
+            >
+                <uxap:blocks>
+                    <upload:UploadSet
+                        id="IdAttaUploader"
+                        items="{viewModel>/Attachment}"
+                        instantUpload="false"
+                        mode="Delete"
+                        beforeUploadStarts="onBeforeAttUpload"
+                        afterItemRemoved="onRemoveAttItem"
+                        uploadCompleted="onComplAttUpload"
+                        uploadEnabled="{= !${viewModel>/IsCompleted} }"
+                    >
+                        <upload:items>
+                            <upload:UploadSetItem
+                                url="{viewModel>Url}"
+                                fileName="{viewModel>FileName}"
+                                mediaType="{viewModel>DocType}"
+                                visibleEdit="false"
+                                enabledEdit="false"
+                                visibleRemove="{= !${viewModel>/IsCompleted} }"
+                            />
+                        </upload:items>
+                    </upload:UploadSet>
+
+                    <!-- visibleRemove="{= ${viewModel>/LoggedUser/Uname} === ${viewModel>Ernam} ? true : false}" -->
+
+                    <!-- <Table
+                        id="IdTableFile"
+                        items="{ path: 'viewModel>/File', templateShareable:false}"
+                        noDataText="{i18n>AddFileToList}"
+                        alternateRowColors="true" 
+                    >
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <ToolbarSpacer />
+                                <Button
+                                    text="{i18n>Add}"
+                                    type="Emphasized"
+                                    icon="sap-icon://add"
+                                    press="onAddFile"
+                                    class="sapUiTinyMarginEnd"
+                                    visible="{viewModel>/Editable}"
+                                />
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column width="10%">
+                                <Text text="{i18n>Posnr}" />
+                            </Column>
+                            <Column width="30%">
+                                <Text text="{i18n>Fname}" />
+                            </Column>
+                            <Column width="50%">
+                                <Text text="{i18n>Descr}" />
+                            </Column>
+                            <Column width="15%">
+                                <Text text="{i18n>Flnam}" />
+                            </Column>
+                            <Column width="15%">
+                                <Text text="{i18n>Fldat}" />
+                            </Column>
+                            <Column
+                                hAlign="Begin"
+                                width="10%"
+                                visible="{viewModel>/Editable}"
+                            >
+                                <Text text="{i18n>Remove}" />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{viewModel>Posnr}" />
+                                    <Link
+                                        text="{viewModel>Fname}"
+                                        press="onOpenFile"
+                                        emphasized="false"
+                                    />
+                                    <TextArea
+                                        value="{viewModel>Descr}"
+                                        rows="4"
+                                        cols="44"
+                                        enabled="{viewModel>/Editable}"
+                                    />
+                                    <Text text="{viewModel>ErnamFullname}" />
+                                    <Text
+                                        text="{ 
+                                                'path': 'viewModel>Erdat',
+                                                'type': 'sap.ui.model.type.Date',
+                                                'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                                    />
+                                    <Button
+                                        icon="sap-icon://decline"
+                                        type="Reject"
+                                        press="onDeleteFile"
+                                        visible="{viewModel>/Editable}"
+                                    />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table> -->
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

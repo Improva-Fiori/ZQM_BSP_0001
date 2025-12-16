@@ -1,0 +1,150 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:cm="sap.suite.ui.commons"
+>
+    <uxap:ObjectPageSection
+        title="{i18n>VehicleTitle}"
+        titleUppercase="false"
+        visible="{viewModel>/TabAuth/Vehicle}"
+    >
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection
+                class="sapUiSmallMargin"
+                title="{i18n>VehicleTitle}"
+                showTitle="true"
+            >
+                <uxap:blocks>
+                    <FlexBox direction="Column">
+                        <FlexBox
+                            id="IdVIntervalBox"
+                            direction="Column"
+                            visible="false"
+                        >
+                            <FlexBox direction="Row">
+                                <FlexBox
+                                    direction="Row"
+                                    class="sapUiTinyMargin"
+                                >
+                                    <Label
+                                        text="{i18n>StartSasi}"
+                                        class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"
+                                        showColon="true"
+                                    />
+                                    <Input
+                                        id="IdVehicleStartSasi"
+                                        valueHelpRequest="onVhSasi"
+                                        showValueHelp="true"
+                                        value="{viewModel>/VehicleStartSasi}"
+                                        valueState="{= ${viewModel>/VehicleStartSasi} !== '' ? 'None' : 'Error'}"
+                                        change="onChangeCharInput"
+                                        maxLength="30"
+                                    />
+                                </FlexBox>
+
+                                <FlexBox
+                                    direction="Row"
+                                    class="sapUiTinyMargin"
+                                >
+                                    <Label
+                                        text="{i18n>EndSasi}"
+                                        class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"
+                                        showColon="true"
+                                    />
+                                    <Input
+                                        id="IdVehicleEndSasi"
+                                        valueHelpRequest="onVhSasi"
+                                        showValueHelp="true"
+                                        value="{viewModel>/VehicleEndSasi}"
+                                        valueState="{= ${viewModel>/VehicleEndSasi} !== '' ? 'None' : 'Error'}"
+                                        change="onChangeCharInput"
+                                        maxLength="30"
+                                    />
+                                </FlexBox>
+                            </FlexBox>
+                            <OverflowToolbar
+                                design="Transparent"
+                                style="Standard"
+                            >
+                                <ToolbarSpacer />
+                                <Button
+                                    text="{i18n>Apply}"
+                                    type="Transparent"
+                                    icon="sap-icon://add"
+                                    press="onMultiAddVehicle"
+                                />
+                                <Button
+                                    text="{i18n>Close}"
+                                    type="Transparent"
+                                    icon="sap-icon://reject"
+                                    press="onCloseMultiAddVehicle"
+                                />
+                            </OverflowToolbar>
+                        </FlexBox>
+
+                        <Table
+                            id="IdTableVehicle"
+                            items="{ path: 'viewModel>/Vehicle', templateShareable:false}"
+                            noDataText="{i18n>AddVehicleToList}"
+                            alternateRowColors="true"
+                            mode="{= ${viewModel>/Editable} ? 'MultiSelect' : 'None'}"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer />
+                                    <Button
+                                        text="{i18n>MultiAdd}"
+                                        type="Emphasized"
+                                        icon="sap-icon://multi-select"
+                                        press="onPrevMultiAddVehicle"
+                                        class="sapUiTinyMarginEnd"
+                                        visible="{viewModel>/Editable}"
+                                        ariaHasPopup="Dialog"
+                                    />
+                                    <Button
+                                        text="{i18n>Add}"
+                                        type="Emphasized"
+                                        icon="sap-icon://add"
+                                        press="onAddVehicle"
+                                        class="sapUiTinyMarginEnd"
+                                        visible="{viewModel>/Editable}"
+                                    />
+                                    <Button
+                                        text="{i18n>Remove}"
+                                        type="Reject"
+                                        icon="sap-icon://delete"
+                                        press="onRemoveVehicle"
+                                        class="sapUiTinyMarginEnd"
+                                        visible="{viewModel>/Editable}"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text="{i18n>Sasi}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Input
+                                            value="{viewModel>SasiNo}"
+                                            enabled="{viewModel>/Editable}"
+                                            valueState="{= ${viewModel>SasiNo} === '' ? 'Error' : 'None'}"
+                                            change="onChangeInputSasi"
+                                            valueHelpRequest="onVhSasi"
+                                            showValueHelp="true"
+                                            maxLength="30"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </FlexBox>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

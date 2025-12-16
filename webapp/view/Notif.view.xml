@@ -1,0 +1,60 @@
+<mvc:View
+    controllerName="com.karsan.qm.sapmaportali.controller.Notif"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+>
+    <uxap:ObjectPageLayout
+        showTitleInHeaderContent="true"
+        upperCaseAnchorBar="false"
+        visible="{viewModel>/VisDetail}"
+    >
+        <uxap:headerTitle>
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.HeaderTitle"
+                type="XML"
+            />
+        </uxap:headerTitle>
+
+        <uxap:headerContent>
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.HeaderContent"
+                type="XML"
+            />
+        </uxap:headerContent>
+
+        <uxap:sections>
+            <!-- <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.Decision"
+                type="XML"
+            /> -->
+
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.General"
+                type="XML"
+            />
+
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.Vehicle"
+                type="XML"
+            />
+
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.Flow"
+                type="XML"
+            />
+
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.File"
+                type="XML"
+            />
+
+            <core:Fragment
+                fragmentName="com.karsan.qm.sapmaportali.view.fragments.NotifDetail.Comment"
+                type="XML"
+            />
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>

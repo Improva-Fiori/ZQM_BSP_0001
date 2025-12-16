@@ -1,0 +1,176 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:cm="sap.suite.ui.commons"
+    xmlns:grid="sap.ui.layout.cssgrid"
+>
+    <uxap:ObjectPageSection
+        title="{i18n>FlowTitle}"
+        titleUppercase="false"
+        visible="{viewModel>/TabAuth/Flow}"
+    >
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection
+                class="sapUiMediumMarginTopBottom"
+                title="{i18n>FlowTitle}"
+                showTitle="false"
+            >
+                <uxap:blocks>
+                    <FlexBox direction="Column">
+                        <Table
+                            id="IdflowTable"
+                            items="{ path: 'viewModel>/FlowView', templateShareable:false}"
+                            noDataText="{i18n>NoDataDisplay}"
+                            alternateRowColors="true"
+                            class="sapUiSmallMarginEnd"
+                            mode="{= !${viewModel>/Editable} ? 'None' : 'SingleSelectMaster'}"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <Button
+                                        text="{i18n>GenerateFlow}"
+                                        press="onGenerateFlow"
+                                        type="Emphasized"
+                                        visible="{= ${viewModel>/Editable} ? !${viewModel>/FlowGenerated} : false}"
+                                    />
+                                    <Button
+                                        text="{i18n>DeleteFlow}"
+                                        press="onDeleteFlow"
+                                        type="Reject"
+                                        visible="{= ${viewModel>/Editable} ? ${viewModel>/FlowGenerated} : false}"
+                                    />
+                                    <Button
+                                        text="{i18n>AddApprover}"
+                                        press="onAddApprover"
+                                        type="Ghost"
+                                        visible="{= ${viewModel>/Editable} ? ${viewModel>/FlowGenerated} : false}"
+                                    />
+                                    <Button
+                                        text="{i18n>DetermineMgd}"
+                                        press="onDetermineMgd"
+                                        type="Emphasized"
+                                        visible="{= ${viewModel>/isAprLogged} &amp;&amp; ${viewModel>/isAprUrtmKltLogged}}"
+                                    />
+                                    <Button
+                                        text="{i18n>DeleteMgd}"
+                                        press="onDeleteMgd"
+                                        type="Reject"
+                                        visible="{= ${viewModel>/isAprLogged} &amp;&amp; ${viewModel>/isAprUrtmKltLogged} &amp;&amp; ${viewModel>/isMgdInFlow}}"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column width="15%">
+                                    <Text text="{i18n>Aprgr}" />
+                                </Column>
+                                <Column width="25%">
+                                    <Text text="{i18n>Aprvrs}" />
+                                </Column>
+                                <Column width="15%">
+                                    <Text text="{i18n>Aprst}" />
+                                </Column>
+                                <Column width="15%">
+                                    <Text text="{i18n>Trapr}" />
+                                </Column>
+                                <Column width="10%">
+                                    <Text text="{i18n>Trdat}" />
+                                </Column>
+                                <Column width="20%">
+                                    <Text text="{i18n>Descr}" />
+                                </Column>
+                                <Column width="10%">
+                                    <Text text="{i18n>Aprdt}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <Text text="{viewModel>Agrtx}" />
+
+                                    <FlexBox>
+                                        <List
+                                            items="{viewModel>Item}"
+                                            noDataText="{i18n>MustAddApprover}"
+                                        >
+                                            <items>
+                                                <CustomListItem>
+                                                    <FlexBox>
+                                                        <Button
+                                                            class="sapUiSmallMarginEnd"
+                                                            press="onRemoveAprvr"
+                                                            type="Reject"
+                                                            icon="sap-icon://delete"
+                                                            visible="{= ${viewModel>/Editable}}"
+                                                        />
+                                                        <Text
+                                                            class="sapUiTinyMarginTop"
+                                                            text="{=  ${viewModel>AprvrFullname} !== '' ? ${viewModel>AprvrFullname} : ${viewModel>Aprvr} }"
+                                                        />
+                                                    </FlexBox>
+                                                </CustomListItem>
+                                            </items>
+                                        </List>
+                                    </FlexBox>
+
+                                    <FlexBox direction="Column">
+                                        <FlexBox
+                                            direction="Row"
+                                            alignItems="Center"
+                                            alignContent="Center"
+                                            visible="{= !(${viewModel>/isAprLogged} &amp;&amp; ${viewModel>/CurrentAprgr} === ${viewModel>Aprgr}) }"
+                                        >
+                                            <ObjectStatus
+                                                visible="{= ${viewModel>Item}.length > 0 }"
+                                                text="{viewModel>AprstTxt}"
+                                                state="{ path:'viewModel>Aprst', formatter:'.formatter._setHighlightFlowItem' }"
+                                            />
+                                        </FlexBox>
+                                        <FlexBox
+                                            direction="Row"
+                                            visible="{= ${viewModel>/isAprLogged} &amp;&amp; ${viewModel>/CurrentAprgr} === ${viewModel>Aprgr} }"
+                                        >
+                                            <Button
+                                                icon="sap-icon://accept"
+                                                type="Accept"
+                                                class="sapUiTinyMarginEnd"
+                                                tooltip="{i18n>Approve}"
+                                                press="onApprove"
+                                            />
+                                            <Button
+                                                icon="sap-icon://decline"
+                                                type="Reject"
+                                                class="sapUiTinyMarginEnd"
+                                                tooltip="{i18n>Reject}"
+                                                press="onReject"
+                                            />
+                                        </FlexBox>
+                                    </FlexBox>
+                                    <Text text="{viewModel>Trapr}" />
+                                    <Text
+                                        text="{ 
+                                                'path': 'viewModel>Trdat',
+                                                'type': 'sap.ui.model.type.Date',
+                                                'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                                    />
+                                    <TextArea
+                                        value="{viewModel>Descr}"
+                                        rows="2"
+                                        cols="44"
+                                        editable="{= ${viewModel>/isAprLogged} &amp;&amp; ${viewModel>/CurrentAprgr} === ${viewModel>Aprgr} }"
+                                    />
+                                    <Text
+                                        text="{ 
+                                                'path': 'viewModel>Aprdt',
+                                                'type': 'sap.ui.model.type.Date',
+                                                'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                                    />
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </FlexBox>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

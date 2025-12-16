@@ -1,0 +1,62 @@
+<core:FragmentDefinition
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:cm="sap.suite.ui.commons"
+>
+    <uxap:ObjectPageSection
+        title="{i18n>CommentTitle}"
+        titleUppercase="false"
+        visible="{viewModel>/TabAuth/Comment}"
+    >
+        <uxap:subSections>
+            <uxap:ObjectPageSubSection
+                class="sapUiSmallMargin"
+                title="{i18n>CommentTitle}"
+                showTitle="true"
+            >
+                <uxap:blocks>
+                    <FlexBox direction="Column">
+                        <List
+                            id="IdListComment"
+                            showSeparators="Inner"
+                            items="{viewModel>/Comment}"
+                            noDataText="{i18n>AddCommentToList}"
+                        >
+                            <FeedListItem
+                                sender="{viewModel>ErnamFullname}"
+                                timestamp="{parts: ['viewModel>Erdat', 'viewModel>Erzet'], formatter: '.formatter.formatDateToTimestamp'}"
+                                text="{viewModel>Descr}"
+                                showIcon="false"
+                                senderActive="false"
+                            >
+                                <actions>
+                                    <!-- <FeedListItemAction
+                                        text="{i18n>Edit}"
+                                        press="onEditComment"
+                                        visible="{viewModel>/Editable}"
+                                    /> -->
+                                    <FeedListItemAction
+                                        text="{i18n>Remove}"
+                                        press="onRemoveComment"
+                                        visible="{= !${viewModel>/IsCompleted} &amp;&amp; ${viewModel>/LoggedUser/Uname} === ${viewModel>Ernam} ? true : false}"
+                                    />
+                                </actions>
+                            </FeedListItem>
+                        </List>
+
+                        <FeedInput
+                            id="IdCommentInput"
+                            class="sapUiSmallMarginTopBottom"
+                            post="onPostComment"
+                            showIcon="false"
+                            placeholder="{i18n>placeholderCommentInput}"
+                            visible="{= !${viewModel>/IsCompleted} }"
+                        />
+                    </FlexBox>
+                </uxap:blocks>
+            </uxap:ObjectPageSubSection>
+        </uxap:subSections>
+    </uxap:ObjectPageSection>
+</core:FragmentDefinition>

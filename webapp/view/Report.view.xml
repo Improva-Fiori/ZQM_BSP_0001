@@ -1,0 +1,415 @@
+<mvc:View
+    controllerName="com.karsan.qm.sapmaportali.controller.Report"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:ui="sap.ui.table"
+>
+    <semantic:SemanticPage
+        fitContent="true"
+        toggleHeaderOnTitleClick="false"
+    >
+        <semantic:headerContent>
+            <smartFilterBar:SmartFilterBar
+                id="idSfbReportSet"
+                entitySet="ReportSet"
+                persistencyKey="SmartFilterPKey"
+                showClearOnFB="true"
+                showRestoreOnFB="false"
+                showGoOnFB="true"
+                showRestoreButton="false"
+                showFilterConfiguration="false"
+            >
+                <smartFilterBar:controlConfiguration>
+                    <smartFilterBar:ControlConfiguration
+                        key="RefQmnum"
+                        label="{i18n>RefQmnum}"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Erdat"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Aedat"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Aprgr"
+                        filterType="multiple"
+                        controlType="dropDownList"
+                        displayBehaviour="descriptionAndId"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Aprdt"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Begda"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Endda"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Qmdab"
+                        filterType="interval"
+                        controlType="date"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Statu"
+                        filterType="multiple"
+                        controlType="dropDownList"
+                        displayBehaviour="descriptionOnly"
+                    />
+                    <smartFilterBar:ControlConfiguration
+                        key="Kaynak"
+                        filterType="single"
+                        controlType="dropDownList"
+                        displayBehaviour="descriptionOnly"
+                    /> 
+                    <smartFilterBar:ControlConfiguration
+                        key="Lifnr"
+                        label="{i18n>Lifnr}"
+                    />
+                </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+        </semantic:headerContent>
+        <semantic:content>
+            <smartTable:SmartTable
+                id="idStReport"
+                entitySet="ReportSet"
+                smartFilterId="idSfbReportSet"
+                tableType="Table"
+                enableExport="true"
+                beforeExport="onBeforeExport"
+                useVariantManagement="true"
+                useTablePersonalisation="true"
+                header="{i18n>TotalFound}"
+                showRowCount="true"
+                showFullScreenButton="true"
+                showVariantManagement="true"
+                demandPopin="false"
+                enableAutoColumnWidth="true"
+                enableAutoBinding="false"
+                persistencyKey="SmartTableAnalytical_Explored"
+                ignoredFields=""
+                initiallyVisibleFields=""
+                requestAtLeastFields="Agrtx,StatuTxt,ErnamFullname,AenamFullname,KaynakTxt"
+                ignoreFromPersonalisation="Agrtx,StatuTxt,ErnamFullname,AenamFullname,KaynakTxt,Aprvr"
+                beforeRebindTable="onAfterRendering"
+            >
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="{i18n>New}"
+                            type="Transparent"
+                            icon="sap-icon://add"
+                            press="onNewNotif"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <ui:Table
+                    id="idReportTable"
+                    alternateRowColors="true"
+                    fixedColumnCount="1"
+                    selectionMode="Single"
+                    rowMode="Auto"
+                    selectionBehavior="RowOnly"
+                    cellClick="onSelectNotif"
+                >
+                    <ui:Column
+                        filterProperty="Qmnum"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Qmnum/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "0", "columnKey": "Qmnum", "additionalProperty":"Qmnum", "leadingProperty": "Qmnum", "autoColumnWidth": \{ "visibleProperty": "Endda" }, "sortProperty": "Qmnum", "filterProperty":"Qmnum"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{Qmnum}" />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="Statu"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Statu/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "5", "columnKey": "Statu", "additionalProperty":"Statu", "leadingProperty": "Statu", "autoColumnWidth": \{ "visibleProperty": "StatuTxt" }, "sortProperty": "Statu", "filterProperty":"Statu"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{StatuTxt}" />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="Lifnr"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>Lifnr}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "6", "columnKey": "Lifnr", "additionalProperty":"Lifnr", "leadingProperty": "Lifnr", "autoColumnWidth": \{ "visibleProperty": "Endda" }, "sortProperty": "Lifnr", "filterProperty":"Lifnr"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{Lifnr}" />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="LfName1"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>LfName1}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "10", "columnKey": "LfName1", "additionalProperty":"LfName1", "leadingProperty": "LfName1", "autoColumnWidth": \{ "visibleProperty": "Endda" }, "sortProperty": "LfName1", "filterProperty":"LfName1"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{LfName1}" />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="RefQmnum"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>RefQmnum}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "10", "columnKey": "RefQmnum", "additionalProperty":"RefQmnum", "leadingProperty": "RefQmnum", "autoColumnWidth": \{ "visibleProperty": "Endda" }, "sortProperty": "RefQmnum", "filterProperty":"RefQmnum"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{RefQmnum}" />
+                        </ui:template>
+                    </ui:Column>
+
+
+                    <ui:Column
+                        filterProperty="Ernam"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Ernam/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "20", "columnKey": "Ernam", "additionalProperty":"Ernam", "leadingProperty": "Ernam", "autoColumnWidth": \{ "visibleProperty": "ErnamFullname" },"sortProperty": "Ernam", "filterProperty":"Ernam"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{ErnamFullname}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Erdat"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Erdat/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "30", "columnKey": "Erdat", "additionalProperty":"Erdat", "leadingProperty": "Erdat", "autoColumnWidth": \{ "visibleProperty": "Erdat" }, "sortProperty": "Erdat", "filterProperty":"Erdat"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Erdat', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Aenam"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Aenam/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "40", "columnKey": "Aenam", "additionalProperty":"Aenam", "leadingProperty": "Aenam",  "autoColumnWidth": \{ "visibleProperty": "AenamFullname" }, "sortProperty": "Aenam", "filterProperty":"Aenam"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{AenamFullname}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Aedat"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Aedat/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "50", "columnKey": "Aedat", "additionalProperty":"Aedat", "leadingProperty": "Aedat", "autoColumnWidth": \{ "visibleProperty": "Aedat" }, "sortProperty": "Aedat", "filterProperty":"Aedat"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Aedat', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="Aprgr"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Aprgr/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "55", "columnKey": "Aprgr", "additionalProperty":"Aprgr", "leadingProperty": "Aprgr",  "autoColumnWidth": \{ "visibleProperty": "Agrtx" }, "sortProperty": "Aprgr", "filterProperty":"Aprgr"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{Agrtx}" />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="AprvrAll"
+                        hAlign="Center"
+                    >
+                        <Label text="{i18n>AprvrAll}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "60", "columnKey": "AprvrAll", "additionalProperty":"AprvrAll", "leadingProperty": "AprvrAll",  "autoColumnWidth": \{ "visibleProperty": "AprvrAll" }, "sortProperty": "AprvrAll", "filterProperty":"AprvrAll"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{AprvrAll}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Aprdt"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Aprdt/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "70", "columnKey": "Aprdt", "additionalProperty":"Aprdt", "leadingProperty": "Aprdt", "autoColumnWidth": \{ "visibleProperty": "Aprdt" }, "sortProperty": "Aprdt", "filterProperty":"Aprdt"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Aprdt', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+
+                    <ui:Column
+                        filterProperty="Kaynak"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Kaynak/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "80", "columnKey": "Kaynak", "additionalProperty":"Kaynak", "leadingProperty": "Kaynak",  "autoColumnWidth": \{ "visibleProperty": "KaynakTxt" }, "sortProperty": "Kaynak", "filterProperty":"Kaynak"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{KaynakTxt}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Begda"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Begda/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "90", "columnKey": "Begda", "additionalProperty":"Begda", "leadingProperty": "Begda", "autoColumnWidth": \{ "visibleProperty": "Begda" }, "sortProperty": "Begda", "filterProperty":"Begda"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Begda', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Endda"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Endda/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "100", "columnKey": "Endda", "additionalProperty":"Endda", "leadingProperty": "Endda", "autoColumnWidth": \{ "visibleProperty": "Endda" }, "sortProperty": "Endda", "filterProperty":"Endda"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Endda', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column
+                        filterProperty="Qmdab"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Qmdab/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "110", "columnKey": "Qmdab", "additionalProperty":"Qmdab", "leadingProperty": "Qmdab", "autoColumnWidth": \{ "visibleProperty": "Qmdab" }, "sortProperty": "Qmdab", "filterProperty":"Qmdab"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text
+                                text="{ 'path': 'Qmdab', 'type': 'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd/MM/y' } }"
+                            />
+                        </ui:template>
+                    </ui:Column>
+
+
+                    <ui:Column
+                        filterProperty="Prueflos"
+                        hAlign="Center"
+                    >
+                        <Label text="{/#Report/Prueflos/@sap:label}" />
+                        <ui:customData>
+                            <core:CustomData
+                                key="p13nData"
+                                value='\{"columnIndex": "120", "columnKey": "Prueflos", "additionalProperty":"Prueflos", "leadingProperty": "Prueflos",  "autoColumnWidth": \{ "visibleProperty": "Prueflos" }, "sortProperty": "Prueflos", "filterProperty":"Prueflos"}'
+                            />
+                        </ui:customData>
+                        <ui:template>
+                            <Text text="{Prueflos}" />
+                        </ui:template>
+                    </ui:Column>
+
+                </ui:Table>
+            </smartTable:SmartTable>
+        </semantic:content>
+    </semantic:SemanticPage>
+</mvc:View>

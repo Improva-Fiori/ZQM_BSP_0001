@@ -1,0 +1,2 @@
+sap.ui.define(["comkarsanqm/sapmaportali/controller/Report.controller"],function(t){"use strict";QUnit.module("Report Controller");QUnit.test("I should test the Report controller",function(o){var e=new t;e.onInit();o.ok(e)})});
+//# sourceMappingURL=Report.controller.js.map

@@ -1,0 +1,177 @@
+{
+	"_version": "1.59.0",
+	"sap.app": {
+		"id": "com.karsan.qm.sapmaportali",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:basic",
+			"version": "1.13.1",
+			"toolsId": "a89653b7-72fc-4daa-b2fd-5dd4b0732070"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/ZQM_0001_SRV/",
+				"type": "OData",
+				"settings": {
+					"annotations": [
+						"annotation0",
+						"annotation1"
+					],
+					"localUri": "localService/metadata.xml",
+					"odataVersion": "2.0"
+				}
+			},
+			"btpService": {
+				"uri": "/sap/opu/odata/sap/ZBTP_0001_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/btpService/metadata.xml",
+					"odataVersion": "2.0"
+				}
+			},
+			"annotation0": {
+				"type": "ODataAnnotation",
+				"uri": "annotations/annotation0.xml",
+				"settings": {
+					"localUri": "annotations/annotation0.xml"
+				}
+			},
+			"annotation1": {
+				"type": "ODataAnnotation",
+				"uri": "annotations/annotation1.xml",
+				"settings": {
+					"localUri": "annotations/annotation1.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.120.12",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.f": {},
+				"sap.suite.ui.generic.template": {},
+				"sap.ui.comp": {},
+				"sap.ui.generic.app": {},
+				"sap.ui.table": {},
+				"sap.ushell": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.karsan.qm.sapmaportali.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"viewModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"uri": "./model/model.json",
+				"preload": true
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {}
+			},
+			"btpService": {
+				"dataSource": "btpService",
+				"preload": true,
+				"settings": {}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "com.karsan.qm.sapmaportali.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "Report",
+					"pattern": ":?query:",
+					"target": [
+						"Report"
+					]
+				},
+				{
+					"name": "Notif",
+					"pattern": "Notif/:Qmnum:",
+					"target": [
+						"Notif"
+					]
+				}
+			],
+			"targets": {
+				"Report": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Report",
+					"viewName": "Report"
+				},
+				"Notif": {
+					"viewType": "XML",
+					"viewName": "Notif"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "com.karsan.qm.sapmaportali.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "App"
+		},
+		"flexBundle": false
+	}
+}
