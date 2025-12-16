@@ -1025,17 +1025,11 @@ sap.ui.define(
                 });
 
                 const hasRkmng = oHeader.Rkmng > 0;
-                const hasBegda = isEmpty(oHeader.Begda);
-                const hasEndda = isEmpty(oHeader.Endda);
-                const hasDate = hasBegda && hasEndda;
-
-                if (
-                    !(
-                        (hasRkmng && !hasDate) ||
-                        (!hasRkmng && hasDate) ||
-                        (hasRkmng && hasDate)
-                    )
-                ) {
+                const hasBegda = !isEmpty(oHeader.Begda);
+                const hasEndda = !isEmpty(oHeader.Endda);
+                const hasDate = hasBegda && hasEndda; 
+                
+                if (!hasRkmng && !hasDate) {
                     addError("ErrMengeOrDate", "FundamentalTitle");
                 }
 
@@ -1094,15 +1088,7 @@ sap.ui.define(
                 const hasRkmng = oHeader.Rkmng > 0;
                 const hasBegda = !isEmpty(oHeader.Begda);
                 const hasEndda = !isEmpty(oHeader.Endda);
-                const hasDate = hasBegda && hasEndda;
-
-                // if (
-                //     !(
-                //         (hasRkmng && !hasDate) ||
-                //         (!hasRkmng && hasDate) ||
-                //         (hasRkmng && hasDate)
-                //     )
-                // )  
+                const hasDate = hasBegda && hasEndda; 
                 if (!hasRkmng && !hasDate) {
                     addError("ErrMengeOrDate", "FundamentalTitle");
                 }
