@@ -1027,9 +1027,20 @@ sap.ui.define(
                 const hasRkmng = oHeader.Rkmng > 0;
                 const hasBegda = !isEmpty(oHeader.Begda);
                 const hasEndda = !isEmpty(oHeader.Endda);
-                const hasDate = hasBegda && hasEndda; 
                 
-                if (!hasRkmng && !hasDate) {
+                // Kısmi tarih girilmişse hata (sadece Begda veya sadece Endda)
+                if ((hasBegda || hasEndda) && !(hasBegda && hasEndda)) {
+                    addError("ErrMengeOrDate", "FundamentalTitle");
+                }
+                
+                // Hem Rkmng hem de tarih girilmişse hata
+                const hasFullDate = hasBegda && hasEndda;
+                if (hasRkmng && hasFullDate) {
+                    addError("ErrMengeOrDate", "FundamentalTitle");
+                }
+                
+                // İkisi de boşsa hata
+                if (!hasRkmng && !hasFullDate) {
                     addError("ErrMengeOrDate", "FundamentalTitle");
                 }
 
@@ -1088,8 +1099,20 @@ sap.ui.define(
                 const hasRkmng = oHeader.Rkmng > 0;
                 const hasBegda = !isEmpty(oHeader.Begda);
                 const hasEndda = !isEmpty(oHeader.Endda);
-                const hasDate = hasBegda && hasEndda; 
-                if (!hasRkmng && !hasDate) {
+                
+                // Kısmi tarih girilmişse hata (sadece Begda veya sadece Endda)
+                if ((hasBegda || hasEndda) && !(hasBegda && hasEndda)) {
+                    addError("ErrMengeOrDate", "FundamentalTitle");
+                }
+                
+                // Hem Rkmng hem de tarih girilmişse hata
+                const hasFullDate = hasBegda && hasEndda;
+                if (hasRkmng && hasFullDate) {
+                    addError("ErrMengeOrDate", "FundamentalTitle");
+                }
+                
+                // İkisi de boşsa hata
+                if (!hasRkmng && !hasFullDate) {
                     addError("ErrMengeOrDate", "FundamentalTitle");
                 }
 

@@ -44,6 +44,7 @@ sap.ui.define(
                 let oUser = this.getViewModel().getProperty("/LoggedUser");
                 let oFbLifnr = this.byId("idSfbReportSet").getControlByKey("Lifnr");
                 if (oUser.IsSupplier) {
+                    oFbLifnr.removeAllTokens();
                     oFbLifnr.setValue(oUser.Uname);
                     oFbLifnr.setEnabled(false);
                 }
