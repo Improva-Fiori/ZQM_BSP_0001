@@ -143,33 +143,6 @@
                                 class="sapUiTinyMarginBottom"
                             >
                                 <Label
-                                    text="{i18n>Matnr}"
-                                    showColon="true"
-                                    width="200px"
-                                    required="true"
-                                />
-                                <FlexBox
-                                    direction="Column"
-                                    alignItems="Start"
-                                >
-                                    <Input
-                                        value="{viewModel>/Header/Matnr}"
-                                        editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
-                                        valueHelpRequest="onVhMatnr"
-                                        showValueHelp="true"
-                                        change="onChangeInputMatnr"
-                                        maxLength="40"
-                                    />
-                                    <Text text="{viewModel>/Header/Maktx}" />
-                                </FlexBox>
-                            </FlexBox>
-
-                            <FlexBox
-                                direction="Row"
-                                alignItems="Start"
-                                class="sapUiTinyMarginBottom"
-                            >
-                                <Label
                                     text="{i18n>Lifnum}"
                                     showColon="true"
                                     width="200px"
@@ -189,6 +162,33 @@
                                         maxLength="10"
                                     />
                                     <Text text="{viewModel>/Header/LfName1}" />
+                                </FlexBox>
+                            </FlexBox>
+
+                            <FlexBox
+                                direction="Row"
+                                alignItems="Start"
+                                class="sapUiTinyMarginBottom"
+                            >
+                                <Label
+                                    text="{i18n>Matnr}"
+                                    showColon="true"
+                                    width="200px"
+                                    required="true"
+                                />
+                                <FlexBox
+                                    direction="Column"
+                                    alignItems="Start"
+                                >
+                                    <Input
+                                        value="{viewModel>/Header/Matnr}"
+                                        editable="{ parts: ['viewModel>/Editable'], formatter: '.formatter.setFieldEditable' }"
+                                        valueHelpRequest="onVhMatnr"
+                                        showValueHelp="true"
+                                        change="onChangeInputMatnr"
+                                        maxLength="40"
+                                    />
+                                    <Text text="{viewModel>/Header/Maktx}" />
                                 </FlexBox>
                             </FlexBox>
 

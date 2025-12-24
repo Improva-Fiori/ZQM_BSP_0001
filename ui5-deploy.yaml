@@ -21,6 +21,6 @@ builder:
           name: ZQM_BSP_0001
           description: QM024/ Sapma Yönetim Servisi
           package: ZQM_024
-          transport: KSDK907883
+          transport:  KSDK908866
         exclude:
           - /test/

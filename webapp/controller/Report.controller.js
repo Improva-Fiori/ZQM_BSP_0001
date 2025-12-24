@@ -58,8 +58,7 @@ sap.ui.define(
                 return this.getOwnerComponent().getRouter().navTo("Notif", { Qmnum: "&1" });
             },
 
-            // BTP Workzone User Info
-            // _getUserInformation: async function () {
+            // BTP Workzone User Info 
             _getUserInformation: async function () {
                 return new Promise((resolve, reject) => {
                     if (window.top === window) {
